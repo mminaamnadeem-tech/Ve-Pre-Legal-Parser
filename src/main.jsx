@@ -1,6 +1,7 @@
 import { StrictMode, useState } from 'react';
 import { Download, FileText, ShieldCheck } from 'lucide-react';
 import { createRoot } from 'react-dom/client';
+import { jsPDF } from 'jspdf';
 import './styles.css';
 
 const standardTerms = `
@@ -119,13 +120,29 @@ function App() {
   const update = (key, value) => setForm((current) => ({ ...current, [key]: value }));
   const updateParty = (party, key, value) => setForm((current) => ({ ...current, [party]: { ...current[party], [key]: value } }));
   const download = () => {
-    const blob = new Blob([getDocument(form)], { type: 'text/markdown;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'mutual-nda.md';
-    link.click();
-    URL.revokeObjectURL(url);
+    const pdf = new jsPDF();
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+    const margin = 18;
+    const lineHeight = 6;
+    let y = margin;
+
+    pdf.setFont('helvetica', 'normal');
+    pdf.setFontSize(10);
+    getDocument(form).split('\n').forEach((line) => {
+      const plainText = line.replace(/^#{1,6}\s/, '').replace(/\*\*/g, '').replace(/\[([^\]]+)\]\([^)]*\)/g, '$1');
+      const wrappedLines = pdf.splitTextToSize(plainText || ' ', pageWidth - margin * 2);
+      wrappedLines.forEach((wrappedLine) => {
+        if (y > pageHeight - margin) {
+          pdf.addPage();
+          y = margin;
+        }
+        pdf.text(wrappedLine, margin, y);
+        y += lineHeight;
+      });
+    });
+
+    pdf.save('mutual-nda.pdf');
   };
 
   return (
@@ -140,7 +157,7 @@ function App() {
           <h1>Mutual NDA</h1>
           <p className="lede">Shape a clear agreement between two parties, then take the finished document with you.</p>
         </div>
-        <button className="download-button" onClick={download}><Download size={17} /> Download .md</button>
+        <button className="download-button" onClick={download}><Download size={17} /> Download .pdf</button>
       </section>
       <div className="workspace">
         <section className="panel form-panel">
