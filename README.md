@@ -4,7 +4,7 @@ A web application to support pre-legal work for the justice department — helpi
 
 ## Overview
 
-This project provides a platform for creating, filling, and managing pre-legal documents before they move into formal legal or court workflows. Instead of starting from scratch, users can select a template, enter the required details, and generate structured documents ready for review.
+This project provides a platform for creating, filling, and managing pre-legal documents before they move into formal legal or court workflows. The first working slice is a Mutual NDA builder: users can complete a cover page, preview the agreement, and download a Markdown document ready for review.
 
 ## Key Features (Planned)
 
@@ -20,18 +20,27 @@ This project provides a platform for creating, filling, and managing pre-legal d
 | Frontend   | [Next.js](https://nextjs.org/) |
 | Backend    | [FastAPI](https://fastapi.tiangolo.com/) |
 
-## Project Structure (Planned)
+## Project Structure
 
 ```
 pre-legal-website/
-├── frontend/     # Next.js application
-├── backend/      # FastAPI application
-└── README.md
+├── src/          # React interface and document generation logic
+├── templates/    # Common Paper legal agreement source documents
+├── catalog.json  # Available template metadata
+├── index.html
+└── package.json
 ```
 
 ## Getting Started
 
-Setup instructions will be added as the frontend and backend are scaffolded.
+Install dependencies and start the frontend development server:
+
+```bash
+npm install
+npm run dev
+```
+
+Create a production build with `npm run build`.
 
 ### Prerequisites
 
