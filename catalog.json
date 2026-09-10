@@ -1,0 +1,62 @@
+[
+  {
+    "name": "AI Addendum",
+    "description": "1. AI Services 1. Using AI Services. The AI Services are part of the Product and subject to the Agreement as supplemented by this AI Addendum. Customer may use AI Services by providing Input. The AI Services may generate Output in response to Input. Provider may copy, display, modify, distribute, and use Input to the extent necessary to provide the AI Services as contemplated by this AI Addendum. Customer authorizes Provider to process Input for all such purposes. 2. Restrictions. Without limiti",
+    "filename": "AI-Addendum.md"
+  },
+  {
+    "name": "Business Associate Agreement",
+    "description": "1. Business Associate Obligations 1. Obligations and Restrictions. Provider may not use or disclose PHI other than as described in this BAA, as permitted under the Privacy Rule, or as otherwise required by applicable law. 2. Permitted Uses and Disclosures. Except as otherwise permitted or required in this BAA, Provider may only use or disclose PHI as reasonably necessary to provide the Services or as otherwise required by applicable law. 3. Privacy and Information Security Program. Provider will",
+    "filename": "BAA.md"
+  },
+  {
+    "name": "Cloud Service Agreement",
+    "description": "1. Service 1. Access and Use. During the Subscription Period and subject to the terms of this Agreement, Customer may (a) access and use the Cloud Service; and (b) copy and use the included Software and Documentation only as needed to access and use the Cloud Service, in each case, for its internal business purposes. If a Customer Affiliate enters a separate Order Form with Provider, the Customer’s Affiliate creates a separate agreement between Provider and that Affiliate, where Provider’s respo",
+    "filename": "CSA.md"
+  },
+  {
+    "name": "Data Processing Agreement",
+    "description": "1. Processor and Subprocessor Relationships 1. Provider as Processor. In situations where Customer is a Controller of the Customer Personal Data, Provider will be deemed a Processor that is Processing Personal Data on behalf of Customer. 2. Provider as Subprocessor. In situations where Customer is a Processor of the Customer Personal Data, Provider will be deemed a Subprocessor of the Customer Personal Data. 2. Processing 1. Processing Details. Annex I(B) on the Cover Page describes the subject ",
+    "filename": "DPA.md"
+  },
+  {
+    "name": "Design Partner Agreement",
+    "description": "1. Design Partner Overview 1. Product Access. Partner would like to be one of the first users of the Product. During the Term, Partner will have early access to the Product for its internal business purposes and to give Feedback to Provider and participate in the Program, so long as Partner complies with the terms of this Agreement. 2. Program and Feedback. The purpose of the Program is for Provider to develop, build, and improve the Product for general use by all of Provider's customers or user",
+    "filename": "design-partner-agreement.md"
+  },
+  {
+    "name": "Mutual Non-Disclosure Agreement",
+    "description": "Common Paper Mutual-NDA template.",
+    "filename": "Mutual-NDA-coverpage.md"
+  },
+  {
+    "name": "Partnership Agreement",
+    "description": "1. Cooperation 1. Obligations. Each party will perform its Obligations as detailed in the Cover Page. 2. Feedback. Each party may, but is not required to, give Feedback to the other party. All Feedback is given \"AS IS\". The party receiving Feedback may use it freely without any restriction or obligation. 2. Payment & Taxes 1. If the Obligations include payment of Fees from one party to the other, the following terms apply: a. Fees and Billing. Unless the Cover Page specifies a different currency",
+    "filename": "Partnership-Agreement.md"
+  },
+  {
+    "name": "Pilot Agreement",
+    "description": "1. Pilot Access 1. Access and Use. During the Pilot Period and subject to the terms of this Agreement, Customer may access and use the Product solely for Customer's Evaluation Purposes. 2. License. If the Product contains Software, then, during the Pilot Period and subject to the terms of this Agreement, Provider grants Customer a limited, non-exclusive, non-sublicensable, non-transferable license to install and use such Software on systems owned or controlled by Customer solely for Customer's E",
+    "filename": "Pilot-Agreement.md"
+  },
+  {
+    "name": "Professional Services Agreement",
+    "description": "1. Services 1. Providing Services. Customer or its Affiliates may enter SOWs with Provider. Provider will perform the Services as detailed in an applicable SOW. Each SOW together with the Key Terms and Standard Terms will constitute a separate agreement. Provider will comply with Customer Policies, if any. If a Customer Affiliate enters an SOW with Provider, references to Customer in the SOW, Key Terms, or Standard Terms will mean that Affiliate for that agreement. 2. Cooperation. Customer will ",
+    "filename": "psa.md"
+  },
+  {
+    "name": "Service Level Agreement",
+    "description": "1. Uptime 1. Target Uptime. If there is a Target Uptime, Provider will use commercially reasonable efforts to make the Cloud Service available for at least the Target Uptime as calculated each calendar month. 2. Calculating Uptime. Provider and Customer agree to calculate availability of the Cloud Service as the total number of Available Minutes minus the number of Downtime Minutes, divided by the total number of Available Minutes, measured in a calendar month. If the Subscription Period include",
+    "filename": "sla.md"
+  },
+  {
+    "name": "Software License Agreement",
+    "description": "1. Software 1. License. During the Subscription Period and subject to the terms of this Agreement, Provider grants Customer a limited, non-exclusive, non-sublicensable, non-transferable (except as permitted in Section 10.6 (Assignment)) license to install and use the Software on systems owned or controlled by Customer for the Permitted Uses. If a Customer Affiliate enters a separate Order Form with Provider, the Customer's Affiliate creates a separate agreement between Provider and that Affiliat",
+    "filename": "Software-License-Agreement.md"
+  },
+  {
+    "name": "Standard Terms",
+    "description": "1. Introduction. This Mutual Non-Disclosure Agreement (which incorporates these Standard Terms and the Cover Page (defined below)) (“MNDA”) allows each party (“Disclosing Party”) to disclose or make available information in connection with the Purpose which (1) the Disclosing Party identifies to the receiving party (“Receiving Party”) as “confidential”, “proprietary”, or the like or (2) should be reasonably understood as confidential or proprietary due to its nature and the circumstances of its ",
+    "filename": "Mutual-NDA.md"
+  }
+]
