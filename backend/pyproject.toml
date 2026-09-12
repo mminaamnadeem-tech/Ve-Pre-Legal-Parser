@@ -1,0 +1,18 @@
+[project]
+name = "pre-legal-backend"
+version = "0.1.0"
+description = "FastAPI backend for the Pre-Legal app"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.115.0",
+  "uvicorn[standard]>=0.30.0",
+  "sqlmodel>=0.0.22",
+  "pytest>=8.0.0",
+  "httpx>=0.27.0",
+  "passlib[bcrypt]>=1.7.4",
+  "email-validator>=2.2.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]

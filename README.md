@@ -1,53 +1,56 @@
 # Pre-Legal Website
 
-A web application to support pre-legal work for the justice department — helping users prepare legal documents efficiently using ready-made templates.
+A web application for preparing legal agreements from reusable templates and a guided drafting flow.
 
 ## Overview
 
-This project provides a platform for creating, filling, and managing pre-legal documents before they move into formal legal or court workflows. The first working slice is a Mutual NDA builder: users can complete a cover page, preview the agreement, and download a Markdown document ready for review.
-
-## Key Features (Planned)
-
-- **Document templates** — Pre-built templates for common justice department documents
-- **Guided document creation** — Step-by-step forms to fill in template fields
-- **Template management** — Organize and maintain document templates in one place
-- **User-friendly interface** — A clean frontend for non-technical staff and legal assistants
-
-## Tech Stack
-
-| Layer      | Technology |
-|------------|------------|
-| Frontend   | [Next.js](https://nextjs.org/) |
-| Backend    | [FastAPI](https://fastapi.tiangolo.com/) |
+The project now includes a FastAPI backend with SQLite-backed sign-up and sign-in, plus a Vite React frontend for the NDA drafting experience. Templates remain stored under the templates directory and metadata is exposed through catalog.json.
 
 ## Project Structure
 
-```
+```text
 pre-legal-website/
-├── src/          # React interface and document generation logic
-├── templates/    # Common Paper legal agreement source documents
-├── catalog.json  # Available template metadata
-├── index.html
-└── package.json
+├── backend/            # FastAPI + SQLite auth service
+├── frontend/           # Vite React ingestion and document builder UI
+├── scripts/            # Start and stop utilities
+├── templates/          # Template source documents
+├── catalog.json        # Template metadata
+├── global-keymap.md    # Implementation constraints
+├── README.md
+└── LICENSE
 ```
 
 ## Getting Started
 
-Install dependencies and start the frontend development server:
+### Backend
 
 ```bash
+cd backend
+uv sync
+uv run uvicorn app.main:app --reload
+```
+
+### Frontend
+
+```bash
+cd frontend
 npm install
 npm run dev
 ```
 
-Create a production build with `npm run build`.
+### Utility scripts
 
-### Prerequisites
+```bash
+./scripts/start_app.sh
+./scripts/stop_app.sh
+```
 
-- Node.js 18+
-- Python 3.11+
-- npm or yarn
+## Verification
+
+- Backend auth tests are stored in backend/tests/test_auth.py.
+- The SQLite database is created fresh on startup in backend/data/prelegal.sqlite.
+- The users table supports sign-up and sign-in using hashed passwords.
 
 ## License
 
-To be determined.
+See LICENSE.
