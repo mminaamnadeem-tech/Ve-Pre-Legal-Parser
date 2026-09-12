@@ -61,7 +61,7 @@ def find_template(filename: str) -> dict | None:
 
 @app.on_event('startup')
 def startup() -> None:
-    init_db(reset=True)
+    init_db(reset=False)
 
 
 @app.get('/api/health')
