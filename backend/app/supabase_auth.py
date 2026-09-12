@@ -17,7 +17,7 @@ class SupabaseAuthError(Exception):
 
 def _settings() -> tuple[str, str]:
     url = os.getenv('SUPABASE_URL', '').rstrip('/')
-    key = os.getenv('SUPABASE_ANON_KEY') or os.getenv('SUPABASE_PUBLISHABLE_KEY', '')
+    key = os.getenv('SUPABASE_PUBLISHABLE_KEY') or os.getenv('SUPABASE_ANON_KEY', '')
     if not url or not key:
         raise SupabaseAuthError('Supabase authentication is not configured', 503)
     return url, key

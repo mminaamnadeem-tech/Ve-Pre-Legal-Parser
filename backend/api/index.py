@@ -1,7 +1,8 @@
 import sys
-import os
+from pathlib import Path
 
-# Add parent directory to path so FastAPI can find app module
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+BACKEND_DIR = Path(__file__).resolve().parents[1]
+if str(BACKEND_DIR) not in sys.path:
+	sys.path.insert(0, str(BACKEND_DIR))
 
 from app.main import app

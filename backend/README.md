@@ -11,7 +11,7 @@ used for users or passwords.
 - `uv run uvicorn app.main:app --reload`
 
 Copy `.env.example` to `.env` and set `SUPABASE_URL` and
-`SUPABASE_ANON_KEY` before starting the backend. Use the same variables in the
+`SUPABASE_PUBLISHABLE_KEY` before starting the backend. Use the same variables in the
  Vercel project settings for the deployed API. Set them for the Production,
  Preview, and Development environments as needed. In Supabase, enable **Confirm email**
 under Authentication > Providers > Email.
