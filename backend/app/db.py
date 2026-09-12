@@ -2,11 +2,13 @@ from __future__ import annotations
 
 from collections.abc import Generator
 from contextlib import contextmanager
+import os
 from pathlib import Path
 
 from sqlmodel import Field, Session, SQLModel, create_engine, select
 
-DB_PATH = Path(__file__).resolve().parent.parent / 'data' / 'prelegal.sqlite'
+default_db_path = '/tmp/prelegal.sqlite' if os.getenv('VERCEL') else Path(__file__).resolve().parent.parent / 'data' / 'prelegal.sqlite'
+DB_PATH = Path(os.getenv('DATABASE_PATH', default_db_path))
 DB_PATH.parent.mkdir(parents=True, exist_ok=True)
 
 engine = create_engine(f'sqlite:///{DB_PATH}')

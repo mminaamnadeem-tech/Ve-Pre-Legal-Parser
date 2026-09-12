@@ -20,7 +20,7 @@ frontend_origin = os.getenv('FRONTEND_ORIGIN', '').rstrip('/')
 app.add_middleware(
     CORSMiddleware,
     allow_origins=['null', frontend_origin] if frontend_origin else ['null'],
-    allow_origin_regex=r'^https?://(localhost|127\.0\.0\.1|0\.0\.0\.0)(:\d+)?$',
+    allow_origin_regex=r'^https?://(localhost|127\.0\.0\.1|0\.0\.0\.0)(:\d+)?$|^https://[a-z0-9-]+\.vercel\.app$',
     allow_credentials=True,
     allow_methods=['*'],
     allow_headers=['*'],
@@ -61,7 +61,12 @@ def find_template(filename: str) -> dict | None:
 
 @app.on_event('startup')
 def startup() -> None:
-    init_db(reset=True)
+    init_db()
+
+
+@app.get('/')
+def root() -> dict[str, str]:
+    return {'status': 'ok', 'service': 'pre-legal-api'}
 
 
 @app.get('/api/health')
