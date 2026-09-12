@@ -22,6 +22,7 @@ class User(SQLModel, table=True):
 
 def init_db(reset: bool = False) -> None:
     if reset and DB_PATH.exists():
+        engine.dispose()
         DB_PATH.unlink()
     SQLModel.metadata.create_all(engine)
 

@@ -332,6 +332,21 @@ function App() {
     setAuthUser(null);
   };
 
+  if (!authUser) {
+    return (
+      <main className="auth-gate-shell">
+        <div className="auth-gate-brand"><span className="brand-mark"><ShieldCheck size={19} /></span><span>pre-legal</span></div>
+        <div className="auth-gate-content">
+          <p className="eyebrow">Private drafting workspace</p>
+          <h1>Prepare agreements with a clear place to begin.</h1>
+          <p className="auth-gate-lede">Create an account or sign in to access the Mutual NDA builder, document library, and saved drafts.</p>
+          <AccountStrip user={authUser} mode={authMode} email={authEmail} password={authPassword} error={authError} savedDrafts={savedDrafts} onModeChange={setAuthMode} onEmailChange={setAuthEmail} onPasswordChange={setAuthPassword} onSubmit={handleAuth} onOpenDraft={openDraft} onSaveDraft={saveDraft} onSignOut={signOut} />
+          <p className="auth-gate-disclaimer">Drafts are subject to legal review. Pre-Legal does not provide legal advice.</p>
+        </div>
+      </main>
+    );
+  }
+
   const download = () => {
     const documentText = selectedTemplate === DEFAULT_TEMPLATE ? getDocument(form) : (templateContent || getDocument(form));
 
