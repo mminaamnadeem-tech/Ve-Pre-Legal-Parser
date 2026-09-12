@@ -4,13 +4,13 @@ A web application for preparing legal agreements from reusable templates and a g
 
 ## Overview
 
-The project now includes a FastAPI backend with SQLite-backed sign-up and sign-in, plus a Vite React frontend for the NDA drafting experience. Templates remain stored under the templates directory and metadata is exposed through catalog.json.
+The project now includes a FastAPI backend with Supabase-backed sign-up and sign-in, plus a Vite React frontend for the NDA drafting experience. Templates remain stored under the templates directory and metadata is exposed through catalog.json.
 
 ## Project Structure
 
 ```text
 pre-legal-website/
-├── backend/            # FastAPI + SQLite auth service
+├── backend/            # FastAPI + Supabase Auth service
 ├── frontend/           # Vite React ingestion and document builder UI
 ├── scripts/            # Start and stop utilities
 ├── templates/          # Template source documents
@@ -48,8 +48,8 @@ npm run dev
 ## Verification
 
 - Backend auth tests are stored in backend/tests/test_auth.py.
-- The SQLite database is created fresh on startup in backend/data/prelegal.sqlite.
-- The users table supports sign-up and sign-in using hashed passwords.
+- Supabase Auth stores users and password credentials.
+- Enable email confirmation in Supabase under Authentication > Providers > Email.
 
 ## License
 

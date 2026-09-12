@@ -4,12 +4,11 @@ import json
 import os
 from pathlib import Path
 
-from passlib.context import CryptContext
 from fastapi import FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, EmailStr
 
-from app.db import User, get_session, get_user_by_email, init_db
+from app.supabase_auth import SupabaseAuthError, signin as supabase_signin, signup as supabase_signup
 
 ROOT_DIR = Path(__file__).resolve().parents[2]
 CATALOG_PATH = ROOT_DIR / 'catalog.json'
@@ -26,9 +25,6 @@ app.add_middleware(
     allow_headers=['*'],
 )
 
-pwd_context = CryptContext(schemes=['pbkdf2_sha256'], deprecated='auto')
-
-
 class SignupRequest(BaseModel):
     email: EmailStr
     password: str
@@ -40,7 +36,7 @@ class SigninRequest(BaseModel):
 
 
 class UserResponse(BaseModel):
-    id: int
+    id: str
     email: str
 
 
@@ -57,11 +53,6 @@ def find_template(filename: str) -> dict | None:
         if item.get('filename', '').lower() == normalized:
             return item
     return None
-
-
-@app.on_event('startup')
-def startup() -> None:
-    init_db()
 
 
 @app.get('/')
@@ -99,23 +90,28 @@ def get_template_document(filename: str) -> dict:
 
 @app.post('/api/signup', status_code=status.HTTP_201_CREATED)
 def signup(payload: SignupRequest):
-    if get_user_by_email(str(payload.email)):
-        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail='User already exists')
+    try:
+        result = supabase_signup(str(payload.email), payload.password)
+    except SupabaseAuthError as error:
+        if error.status_code in {400, 422}:
+            raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail='User already exists or signup is not allowed') from error
+        raise HTTPException(status_code=error.status_code, detail=str(error)) from error
 
-    password_hash = pwd_context.hash(payload.password)
-    with get_session() as session:
-        user = User(email=str(payload.email), password_hash=password_hash)
-        session.add(user)
-        session.commit()
-        session.refresh(user)
-
-    return {'user': {'id': user.id, 'email': user.email}}
+    user = result.get('user') or {}
+    return {
+        'user': {'id': user.get('id'), 'email': user.get('email', str(payload.email))},
+        'email_confirmation_required': result.get('session') is None,
+    }
 
 
 @app.post('/api/signin')
 def signin(payload: SigninRequest):
-    user = get_user_by_email(str(payload.email))
-    if not user or not pwd_context.verify(payload.password, user.password_hash):
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Invalid credentials')
+    try:
+        result = supabase_signin(str(payload.email), payload.password)
+    except SupabaseAuthError as error:
+        if error.status_code in {400, 401}:
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Invalid credentials') from error
+        raise HTTPException(status_code=error.status_code, detail=str(error)) from error
 
-    return {'user': {'id': user.id, 'email': user.email}}
+    user = result.get('user') or {}
+    return {'user': {'id': user.get('id'), 'email': user.get('email', str(payload.email))}}

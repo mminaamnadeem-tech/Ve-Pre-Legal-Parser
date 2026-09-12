@@ -317,6 +317,13 @@ function App() {
       return;
     }
 
+    if (authMode === 'signup' && payload.email_confirmation_required) {
+      setAuthError('Account created. Check your email to confirm your address, then sign in.');
+      setAuthEmail('');
+      setAuthPassword('');
+      return;
+    }
+
     const user = payload.user;
     localStorage.setItem('prelegal-user', JSON.stringify(user));
     setAuthUser(user);
