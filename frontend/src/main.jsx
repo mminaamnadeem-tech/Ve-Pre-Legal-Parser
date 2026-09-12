@@ -7,6 +7,15 @@ import './styles.css';
 const API_BASE = import.meta.env.VITE_API_BASE_URL || (import.meta.env.DEV ? '' : 'http://127.0.0.1:8000');
 const DEFAULT_TEMPLATE = 'Mutual-NDA-coverpage.md';
 
+async function apiFetch(path, options) {
+  try {
+    return await fetch(`${API_BASE}${path}`, options);
+  } catch (error) {
+    if (!import.meta.env.DEV || API_BASE) throw error;
+    return fetch(`http://127.0.0.1:8000${path}`, options);
+  }
+}
+
 const standardTerms = `
 ## Standard Terms
 
@@ -242,7 +251,7 @@ function App() {
   ]);
 
   useEffect(() => {
-    fetch(`${API_BASE}/api/templates`)
+    apiFetch('/api/templates')
       .then((response) => response.ok ? response.json() : [])
       .then((items) => {
         setTemplates(items);
@@ -258,7 +267,7 @@ function App() {
   useEffect(() => {
     if (!selectedTemplate) return;
 
-    fetch(`${API_BASE}/api/templates/${encodeURIComponent(selectedTemplate)}`)
+    apiFetch(`/api/templates/${encodeURIComponent(selectedTemplate)}`)
       .then((response) => response.ok ? response.json() : null)
       .then((item) => {
         setTemplateContent(item ? item.content : '');
@@ -291,7 +300,7 @@ function App() {
     event.preventDefault();
     setAuthError('');
     try {
-      const response = await fetch(`${API_BASE}/api/${authMode}`, {
+      const response = await apiFetch(`/api/${authMode}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: authEmail, password: authPassword }),
@@ -303,7 +312,7 @@ function App() {
       setAuthUser(user);
       setAuthPassword('');
     } catch (error) {
-      setAuthError(error.message);
+      setAuthError('Unable to reach the server. Please refresh the page and try again.');
     }
   };
 
