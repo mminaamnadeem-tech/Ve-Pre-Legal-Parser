@@ -2,30 +2,36 @@
 
 :root { font-family: 'Manrope', sans-serif; color: #17211d; background: #f4f1e9; font-synthesis: none; }
 * { box-sizing: border-box; }
-body { margin: 0; min-width: 320px; background: radial-gradient(circle at 94% 4%, rgba(198, 218, 192, .42), transparent 28rem), #f4f1e9; }
+body { margin: 0; min-width: 320px; background: #f5f6f8; }
 button, input, textarea, select { font: inherit; }
 button { cursor: pointer; }
 .app-shell { width: min(1440px, 100%); margin: 0 auto; padding: 0 38px 28px; }
-.auth-gate-shell { position: relative; isolation: isolate; width: min(1180px, 100%); min-height: 100vh; margin: 0 auto; padding: 34px 38px; overflow: hidden; }
-.auth-gate-shell::before { position: absolute; z-index: -1; top: 12%; right: -8%; width: 54%; height: 1px; content: ''; background: #cfd8ce; transform: rotate(-18deg); transform-origin: right; opacity: .7; }
-.auth-gate-shell::after { position: absolute; z-index: -1; right: 0; bottom: 8%; width: 46%; height: 1px; content: ''; background: #d8cbbd; transform: rotate(18deg); transform-origin: right; opacity: .65; }
-.auth-gate-brand { display: flex; align-items: center; gap: 10px; color: #17211d; font-size: 18px; font-weight: 800; letter-spacing: -.04em; }
-.auth-gate-content { max-width: 760px; padding: 14vh 0 0; animation: auth-content-in .65s ease-out both; }
-.auth-gate-content h1 { max-width: 700px; margin-bottom: 18px; font-size: clamp(42px, 6vw, 70px); }
-.auth-gate-lede { max-width: 560px; margin-bottom: 30px; color: #66736d; font-size: 16px; line-height: 1.65; }
-.auth-gate-content .account-strip { position: relative; display: block; max-width: 760px; margin: 0; padding: 28px; border-color: #cfd6cc; background: rgba(255, 254, 249, .92); box-shadow: 0 22px 55px rgba(54, 66, 55, .09); animation: auth-card-in .7s .1s ease-out both; }
-.auth-gate-content .account-strip::before { position: absolute; top: 0; left: 28px; width: 52px; height: 3px; content: ''; background: #a35b2d; }
-.auth-gate-content .account-copy { margin-bottom: 24px; }
-.auth-gate-content .account-copy h2 { margin-bottom: 8px; color: #164b3b; font-size: 23px; }
-.auth-gate-content .account-copy p:last-child { max-width: 420px; font-size: 12px; line-height: 1.55; }
-.auth-gate-content .auth-form { display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; align-items: end; }
-.auth-gate-content .auth-form input { min-height: 45px; background: #f8faf5; }
-.auth-gate-content .auth-form input:focus { background: #fffefb; }
-.auth-gate-content .auth-form .download-button { min-height: 45px; justify-content: center; transition: background .2s, transform .2s, box-shadow .2s; }
-.auth-gate-content .auth-form .download-button:hover { box-shadow: 0 7px 16px rgba(22, 75, 59, .18); }
-.auth-gate-content .auth-footer { flex-direction: row; align-items: center; justify-content: space-between; margin-top: 17px; padding-top: 15px; border-top: 1px solid #e2e4dc; }
-.auth-gate-content .auth-footer span { max-width: 280px; }
-.auth-gate-disclaimer { margin-top: 18px; color: #8c5a3b; font: 11px 'DM Mono', monospace; }
+.auth-gate-shell { position: relative; isolation: isolate; width: 100%; min-height: 100vh; margin: 0 auto; padding: 20px 28px; overflow: hidden; }
+.auth-gate-brand { display: flex; align-items: center; gap: 8px; color: #313743; font-size: 16px; font-weight: 800; letter-spacing: -.04em; }
+.auth-gate-brand .brand-mark { width: 25px; height: 25px; color: #fff; background: #377cf4; border-radius: 7px; }
+.auth-gate-content { display: flex; justify-content: center; padding: 5vh 0 0; animation: auth-content-in .65s ease-out both; }
+.auth-gate-content .account-strip { position: relative; display: block; width: min(100%, 430px); margin: 0; padding: 27px 29px 35px; border: 1px solid #e1e4e8; border-radius: 4px; background: #fff; box-shadow: 0 5px 16px rgba(35, 47, 62, .04); animation: auth-card-in .7s .1s ease-out both; }
+.auth-gate-content .account-copy { margin-bottom: 25px; }
+.auth-gate-content .auth-helper { margin-bottom: 8px; color: #9ca3ae; font-size: 11px; }
+.auth-gate-content .account-copy h2 { margin: 0; color: #272d38; font-size: 23px; line-height: 1.15; letter-spacing: -.045em; }
+.auth-gate-content .auth-form { display: flex; flex-direction: column; gap: 12px; }
+.auth-gate-content .auth-form input[type='email'], .auth-gate-content .auth-form input[type='password'] { min-height: 40px; padding: 11px 10px; border-color: #e3e6ea; border-radius: 4px; background: #fff; color: #303642; font-size: 11px; }
+.auth-gate-content .auth-form input::placeholder { color: #a9afb8; }
+.auth-gate-content .auth-form input:focus { border-color: #377cf4; box-shadow: 0 0 0 3px rgba(55, 124, 244, .12); }
+.auth-options { display: flex; align-items: center; justify-content: space-between; margin: -1px 0 14px; color: #6f7782; font-size: 9px; }
+.auth-options label { display: flex; align-items: center; gap: 3px; }
+.auth-options input { width: 11px; height: 11px; margin: 0; accent-color: #377cf4; }
+.auth-options button, .auth-switch button { border: 0; padding: 0; color: #377cf4; background: transparent; font-size: inherit; }
+.auth-options button:hover, .auth-switch button:hover { text-decoration: underline; }
+.auth-gate-content .auth-form .download-button { min-height: 39px; justify-content: center; border-radius: 4px; background: #377cf4; font-size: 11px; box-shadow: 0 4px 8px rgba(55, 124, 244, .16); transition: background .2s, transform .2s, box-shadow .2s; }
+.auth-gate-content .auth-form .download-button:hover { background: #2869d7; box-shadow: 0 7px 14px rgba(55, 124, 244, .22); }
+.google-button { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 39px; border: 1px solid #e3e6ea; border-radius: 4px; color: #3d434c; background: #fff; font-size: 11px; }
+.google-button:hover { border-color: #c5cbd3; background: #fafbfd; }
+.google-mark { color: #4285f4; font-size: 15px; font-weight: 800; }
+.auth-gate-content .auth-footer { flex-direction: column; align-items: center; justify-content: center; margin-top: 18px; padding-top: 0; border-top: 0; color: #9299a4; font-size: 10px; }
+.auth-switch { color: #9299a4; }
+.auth-gate-content .auth-footer span[role='alert'] { max-width: 100%; color: #b44c45; font-size: 10px; text-align: center; }
+.auth-gate-disclaimer { margin: 18px auto 0; color: #9ba2ac; font-size: 10px; text-align: center; }
 .topbar { height: 82px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #d8d8ce; }
 .brand { display: flex; align-items: center; gap: 10px; color: #17211d; text-decoration: none; font-size: 18px; font-weight: 800; letter-spacing: -.04em; }
 .brand-mark { display: grid; place-items: center; width: 32px; height: 32px; color: #f4f1e9; background: #164b3b; border-radius: 50%; }
@@ -121,5 +127,5 @@ footer { display: flex; justify-content: space-between; gap: 18px; padding: 25px
 @keyframes auth-card-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 @media (max-width: 900px) { .app-shell { padding: 0 20px 24px; } .workspace { grid-template-columns: 1fr; } .preview-panel { position: static; } .intro { padding-top: 46px; } }
 @media (max-width: 900px) { .account-strip, .account-strip.signed-in { grid-template-columns: 1fr; align-items: start; } .auth-form { flex-wrap: wrap; } .auth-form input { flex: 1 1 180px; } .auth-footer { align-items: start; } .auth-footer span { text-align: left; } .saved-drafts { flex-wrap: wrap; } }
-@media (max-width: 600px) { .header-meta { display: none; } .intro { display: block; } .intro-actions { margin-top: 25px; flex-wrap: wrap; } .download-button { margin-top: 0; } .form-content, .panel-heading, .preview-header { padding-left: 18px; padding-right: 18px; } .two-column, .party-grid, .preview-grid { grid-template-columns: 1fr; gap: 0; } .document-preview { min-height: 600px; padding: 28px 22px; } footer { gap: 12px; flex-direction: column; } .legal-disclaimer { text-align: left; } .auth-gate-shell { padding: 24px 20px; } .auth-gate-content { padding-top: 14vh; } .auth-gate-content h1 { font-size: 42px; } .auth-gate-content .account-strip { padding: 24px 18px; } .auth-gate-content .account-strip::before { left: 18px; } .auth-gate-content .auth-form { grid-template-columns: 1fr; } .auth-gate-content .auth-footer { align-items: flex-start; flex-direction: column; gap: 9px; } }
+@media (max-width: 600px) { .header-meta { display: none; } .intro { display: block; } .intro-actions { margin-top: 25px; flex-wrap: wrap; } .download-button { margin-top: 0; } .form-content, .panel-heading, .preview-header { padding-left: 18px; padding-right: 18px; } .two-column, .party-grid, .preview-grid { grid-template-columns: 1fr; gap: 0; } .document-preview { min-height: 600px; padding: 28px 22px; } footer { gap: 12px; flex-direction: column; } .legal-disclaimer { text-align: left; } .auth-gate-shell { padding: 20px 16px; } .auth-gate-content { padding-top: 8vh; } .auth-gate-content .account-strip { padding: 24px 18px 30px; } }
 @media (prefers-reduced-motion: reduce) { .auth-gate-content, .auth-gate-content .account-strip { animation: none; } }

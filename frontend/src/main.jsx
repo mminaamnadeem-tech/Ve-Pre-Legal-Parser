@@ -211,13 +211,15 @@ function AccountStrip({ user, mode, email, password, error, savedDrafts, onModeC
 
   return (
     <section className="account-strip">
-      <div className="account-copy"><p className="eyebrow">Your workspace</p><h2>{mode === 'signin' ? 'Sign in to reopen drafts' : 'Create your drafting workspace'}</h2><p>Save agreements in this browser and return to them later.</p></div>
+      <div className="account-copy"><p className="auth-helper">Please enter your details</p><h2>{mode === 'signin' ? 'Welcome back' : 'Create your account'}</h2></div>
       <form className="auth-form" onSubmit={onSubmit}>
         <input type="email" value={email} onChange={(event) => onEmailChange(event.target.value)} placeholder="you@company.com" aria-label="Email address" required />
         <input type="password" value={password} onChange={(event) => onPasswordChange(event.target.value)} placeholder="Password" aria-label="Password" minLength="8" required />
+        <div className="auth-options"><label><input type="checkbox" /> <span>Remember for 30 days</span></label><button type="button">Forgot password</button></div>
         <button className="download-button" type="submit"><LogIn size={15} /> {mode === 'signin' ? 'Sign in' : 'Sign up'}</button>
+        <button className="google-button" type="button"><span className="google-mark">G</span> Sign in with Google</button>
       </form>
-      <div className="auth-footer"><button type="button" onClick={() => onModeChange(mode === 'signin' ? 'signup' : 'signin')}>{mode === 'signin' ? 'Need an account? Sign up' : 'Already registered? Sign in'}</button>{error && <span role="alert">{error}</span>}</div>
+      <div className="auth-footer"><span className="auth-switch">{mode === 'signin' ? "Don't have an account?" : 'Already have an account?'} <button type="button" onClick={() => onModeChange(mode === 'signin' ? 'signup' : 'signin')}>{mode === 'signin' ? 'Sign up' : 'Sign in'}</button></span>{error && <span role="alert">{error}</span>}</div>
     </section>
   );
 }
@@ -335,14 +337,11 @@ function App() {
   if (!authUser) {
     return (
       <main className="auth-gate-shell">
-        <div className="auth-gate-brand"><span className="brand-mark"><ShieldCheck size={19} /></span><span>pre-legal</span></div>
+        <div className="auth-gate-brand"><span className="brand-mark"><ShieldCheck size={17} /></span><span>pre-legal</span></div>
         <div className="auth-gate-content">
-          <p className="eyebrow">Private drafting workspace</p>
-          <h1>Prepare agreements with a clear place to begin.</h1>
-          <p className="auth-gate-lede">Create an account or sign in to access the Mutual NDA builder, document library, and saved drafts.</p>
           <AccountStrip user={authUser} mode={authMode} email={authEmail} password={authPassword} error={authError} savedDrafts={savedDrafts} onModeChange={setAuthMode} onEmailChange={setAuthEmail} onPasswordChange={setAuthPassword} onSubmit={handleAuth} onOpenDraft={openDraft} onSaveDraft={saveDraft} onSignOut={signOut} />
-          <p className="auth-gate-disclaimer">Drafts are subject to legal review. Pre-Legal does not provide legal advice.</p>
         </div>
+        <p className="auth-gate-disclaimer">Drafts are subject to legal review. Pre-Legal does not provide legal advice.</p>
       </main>
     );
   }
