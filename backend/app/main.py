@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 
 from passlib.context import CryptContext
@@ -15,9 +16,10 @@ CATALOG_PATH = ROOT_DIR / 'catalog.json'
 TEMPLATE_DIR = ROOT_DIR / 'templates'
 
 app = FastAPI(title='Pre-Legal API')
+frontend_origin = os.getenv('FRONTEND_ORIGIN', '').rstrip('/')
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=['null'],
+    allow_origins=['null', frontend_origin] if frontend_origin else ['null'],
     allow_origin_regex=r'^https?://(localhost|127\.0\.0\.1|0\.0\.0\.0)(:\d+)?$',
     allow_credentials=True,
     allow_methods=['*'],
