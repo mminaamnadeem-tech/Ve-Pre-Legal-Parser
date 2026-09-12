@@ -299,21 +299,28 @@ function App() {
   const handleAuth = async (event) => {
     event.preventDefault();
     setAuthError('');
+    let response;
     try {
-      const response = await apiFetch(`/api/${authMode}`, {
+      response = await apiFetch(`/api/${authMode}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: authEmail, password: authPassword }),
       });
-      const payload = await response.json();
-      if (!response.ok) throw new Error(payload.detail || 'Unable to authenticate');
-      const user = payload.user;
-      localStorage.setItem('prelegal-user', JSON.stringify(user));
-      setAuthUser(user);
-      setAuthPassword('');
     } catch (error) {
       setAuthError('Unable to reach the server. Please refresh the page and try again.');
+      return;
     }
+
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      setAuthError(payload.detail || 'Unable to authenticate. Please check your details and try again.');
+      return;
+    }
+
+    const user = payload.user;
+    localStorage.setItem('prelegal-user', JSON.stringify(user));
+    setAuthUser(user);
+    setAuthPassword('');
   };
 
   const saveDraft = () => {
