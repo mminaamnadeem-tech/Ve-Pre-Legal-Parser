@@ -4,7 +4,7 @@ import { createRoot } from 'react-dom/client';
 import { jsPDF } from 'jspdf';
 import './styles.css';
 
-const API_BASE = 'http://localhost:8000';
+const API_BASE = import.meta.env.VITE_API_BASE_URL || (import.meta.env.DEV ? '' : 'http://127.0.0.1:8000');
 const DEFAULT_TEMPLATE = 'Mutual-NDA-coverpage.md';
 
 const standardTerms = `
