@@ -5,6 +5,7 @@ from pathlib import Path
 
 from passlib.context import CryptContext
 from fastapi import FastAPI, HTTPException, status
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, EmailStr
 
 from app.db import User, get_session, get_user_by_email, init_db
@@ -14,6 +15,13 @@ CATALOG_PATH = ROOT_DIR / 'catalog.json'
 TEMPLATE_DIR = ROOT_DIR / 'templates'
 
 app = FastAPI(title='Pre-Legal API')
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['http://localhost:5173', 'http://127.0.0.1:5173'],
+    allow_credentials=True,
+    allow_methods=['*'],
+    allow_headers=['*'],
+)
 
 pwd_context = CryptContext(schemes=['pbkdf2_sha256'], deprecated='auto')
 
