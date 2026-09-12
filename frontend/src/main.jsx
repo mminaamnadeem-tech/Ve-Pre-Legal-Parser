@@ -217,7 +217,6 @@ function AccountStrip({ user, mode, email, password, error, savedDrafts, onModeC
         <input type="password" value={password} onChange={(event) => onPasswordChange(event.target.value)} placeholder="Password" aria-label="Password" minLength="8" required />
         <div className="auth-options"><label><input type="checkbox" /> <span>Remember for 30 days</span></label><button type="button">Forgot password</button></div>
         <button className="download-button" type="submit"><LogIn size={15} /> {mode === 'signin' ? 'Sign in' : 'Sign up'}</button>
-        <button className="google-button" type="button"><span className="google-mark">G</span> Sign in with Google</button>
       </form>
       <div className="auth-footer"><span className="auth-switch">{mode === 'signin' ? "Don't have an account?" : 'Already have an account?'} <button type="button" onClick={() => onModeChange(mode === 'signin' ? 'signup' : 'signin')}>{mode === 'signin' ? 'Sign up' : 'Sign in'}</button></span>{error && <span role="alert">{error}</span>}</div>
     </section>
